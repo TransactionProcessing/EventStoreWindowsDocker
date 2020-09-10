@@ -15,14 +15,14 @@ jobs:
     
     - name: Get the version
       id: get_version
-      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+      uses: battila7/get-version-action@v2
     
     - name: Build Docker Images 
       run: |
-        docker build . --file Dockerfile --tag stuartferguson/eventstore:latest --tag stuartferguson/eventstore:${{ steps.get_version.outputs.VERSION }}
+        docker build . --file Dockerfile --tag stuartferguson/eventstore:latest --tag stuartferguson/eventstore:${{ steps.get_version.outputs.version }}
 
     - name: Publish Images to Docker Hub
       run: |
         docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
-        docker push stuartferguson/estatemanagement:latest
-        docker push stuartferguson/estatemanagement:${{ steps.get_version.outputs.VERSION }}
+        docker push stuartferguson/eventstore:latest
+        docker push stuartferguson/eventstore:${{ steps.get_version.outputs.version }}
