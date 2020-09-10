@@ -1,0 +1,28 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+
+  build:
+
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Get the version
+      id: get_version
+      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+    
+    - name: Build Docker Images 
+      run: |
+        docker build . --file Dockerfile --tag stuartferguson/eventstore:latest --tag stuartferguson/eventstore:${{ steps.get_version.outputs.VERSION }}
+
+    - name: Publish Images to Docker Hub
+      run: |
+        docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
+        docker push stuartferguson/estatemanagement:latest
+        docker push stuartferguson/estatemanagement:${{ steps.get_version.outputs.VERSION }
