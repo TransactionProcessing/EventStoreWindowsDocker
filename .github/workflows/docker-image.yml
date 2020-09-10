@@ -25,4 +25,4 @@ jobs:
       run: |
         docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
         docker push stuartferguson/estatemanagement:latest
-        docker push stuartferguson/estatemanagement:${{ steps.get_version.outputs.VERSION }
+        docker push stuartferguson/estatemanagement:${{ steps.get_version.outputs.VERSION }}
