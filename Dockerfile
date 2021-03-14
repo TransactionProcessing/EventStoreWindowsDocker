@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2019 AS downloader
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
-ENV ES_VERSION="20.6.0" `
+ENV ES_VERSION="20.10.0" `
     ES_HOME="C:\eventstore"
 
 # ENV chocolateyUseWindowsCompression false
@@ -20,7 +20,7 @@ RUN Invoke-WebRequest "https://eventstore.org/downloads/win/EventStore-OSS-Windo
 FROM mcr.microsoft.com/windows/servercore:ltsc2019
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
 
-ENV ES_VERSION="20.6.0" `
+ENV ES_VERSION="20.10.0" `
 ES_HOME="C:\eventstore" `
 DOTNET_RUNNING_IN_CONTAINER=true
 
@@ -32,7 +32,7 @@ VOLUME C:\Logs
 RUN New-Item -Path Config -ItemType Directory | Out-Null
 
 WORKDIR $ES_HOME
-COPY --from=downloader C:\eventstore\EventStore-OSS-Windows-2019-v20.6.0 .
+COPY --from=downloader C:\eventstore\EventStore-OSS-Windows-2019-v20.10.0 .
 COPY eventstore.conf .\Config\
 
 # Run Service
