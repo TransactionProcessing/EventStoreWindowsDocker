@@ -14,7 +14,7 @@ ENV ES_VERSION="20.10.0" `
 
 # RUN choco install eventstore-oss
 
-RUN Invoke-WebRequest "https://eventstore.com/downloads/win/EventStore-OSS-Windows-2019-v$($env:ES_VERSION).zip" -OutFile 'eventstore.zip' -UseBasicParsing; `
+RUN Invoke-WebRequest "https://github.com/EventStore/Downloads/raw/master/win/EventStore-OSS-Windows-2019-v$($env:ES_VERSION).zip" -OutFile 'eventstore.zip' -UseBasicParsing; `
     Expand-Archive eventstore.zip -DestinationPath $env:ES_HOME ;
 
 FROM mcr.microsoft.com/windows/servercore:ltsc2019
