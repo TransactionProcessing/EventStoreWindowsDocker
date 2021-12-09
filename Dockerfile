@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2019 AS downloader
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
-ENV ES_VERSION="20.10.0" `
+ENV ES_VERSION="21.2.0" `
     ES_HOME="C:\eventstore"
 
 # ENV chocolateyUseWindowsCompression false
@@ -20,7 +20,7 @@ RUN Invoke-WebRequest "https://github.com/EventStore/Downloads/raw/master/win/Ev
 FROM mcr.microsoft.com/windows/servercore:ltsc2019
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
 
-ENV ES_VERSION="20.10.0" `
+ENV ES_VERSION="21.2.0" `
 ES_HOME="C:\eventstore" `
 DOTNET_RUNNING_IN_CONTAINER=true
 
