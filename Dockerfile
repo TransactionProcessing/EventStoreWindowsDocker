@@ -32,7 +32,7 @@ VOLUME C:\Logs
 RUN New-Item -Path Config -ItemType Directory | Out-Null
 
 WORKDIR $ES_HOME
-COPY --from=downloader C:\eventstore\EventStore-OSS-Windows-2019-v20.10.0 .
+COPY --from=downloader C:\eventstore\EventStore-OSS-Windows-2019-v21.2.0 .
 COPY eventstore.conf .\Config\
 
 # Run Service
