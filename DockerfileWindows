@@ -33,7 +33,7 @@ RUN New-Item -Path Config -ItemType Directory | Out-Null
 
 WORKDIR $ES_HOME
 COPY --from=downloader C:\eventstore\EventStore-OSS-Windows-2019-v21.10.0 .
-COPY eventstore_windows.conf .\Config\eventstore.conf
+COPY eventstore.conf .\Config\eventstore.conf
 
 
 # Run Service
