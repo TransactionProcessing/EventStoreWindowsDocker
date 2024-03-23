@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2019 AS downloader
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
-ENV ES_VERSION="21.10.0" `
+ENV ES_VERSION="24.2.0" `
     ES_HOME="C:\eventstore"
 
 # ENV chocolateyUseWindowsCompression false
@@ -20,7 +20,7 @@ Expand-Archive eventstore.zip -DestinationPath $env:ES_HOME ;
 FROM mcr.microsoft.com/windows/servercore:ltsc2019
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
 
-ENV ES_VERSION="21.10.0" `
+ENV ES_VERSION="24.2.0" `
 ES_HOME="C:\eventstore" `
 DOTNET_RUNNING_IN_CONTAINER=true
 
