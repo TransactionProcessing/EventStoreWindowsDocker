@@ -16,7 +16,7 @@ ENV ES_VERSION="24.2.0" `
 RUN Invoke-WebRequest "https://github.com/EventStore/EventStore/releases/download/oss-v$($env:ES_VERSION)/EventStore-OSS-Windows-2019-v$($env:ES_VERSION).zip" -OutFile 'eventstore.zip' -UseBasicParsing; `
 Expand-Archive eventstore.zip -DestinationPath $env:ES_HOME ;
 
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+FROM mcr.microsoft.com/windows/servercore:ltsc2022
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
 
 ENV ES_VERSION="24.2.0" `
