@@ -13,7 +13,7 @@ ENV ES_VERSION="24.10.1" `
 #         choco feature disable --name showDownloadProgress
 
 # RUN choco install eventstore-oss
-RUN Invoke-WebRequest "https://github.com/EventStore/EventStore/releases/download/v$($env:ES_VERSION)/eventstoredb-($env:ES_VERSION)-windows.x64.zip" -OutFile 'eventstore.zip' -UseBasicParsing; `
+RUN Invoke-WebRequest "https://github.com/EventStore/EventStore/releases/download/v24.10.1/eventstoredb-24.10.1-ee-windows.x64.zip" -OutFile 'eventstore.zip' -UseBasicParsing; `
 Expand-Archive eventstore.zip -DestinationPath $env:ES_HOME ;
 
 FROM mcr.microsoft.com/windows/servercore:ltsc2022
