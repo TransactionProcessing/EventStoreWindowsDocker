@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2022 AS downloader
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
-ENV ES_VERSION="24.2.0" `
+ENV ES_VERSION="24.10.1" `
     ES_HOME="C:\eventstore"
 
 # ENV chocolateyUseWindowsCompression false
@@ -13,13 +13,13 @@ ENV ES_VERSION="24.2.0" `
 #         choco feature disable --name showDownloadProgress
 
 # RUN choco install eventstore-oss
-RUN Invoke-WebRequest "https://github.com/EventStore/EventStore/releases/download/oss-v$($env:ES_VERSION)/EventStore-OSS-Windows-2019-v$($env:ES_VERSION).zip" -OutFile 'eventstore.zip' -UseBasicParsing; `
+RUN Invoke-WebRequest "https://github.com/EventStore/EventStore/releases/download/v$($env:ES_VERSION)/eventstoredb-($env:ES_VERSION)-windows.x64.zip" -OutFile 'eventstore.zip' -UseBasicParsing; `
 Expand-Archive eventstore.zip -DestinationPath $env:ES_HOME ;
 
 FROM mcr.microsoft.com/windows/servercore:ltsc2022
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
 
-ENV ES_VERSION="24.2.0" `
+ENV ES_VERSION="24.10.1" `
 ES_HOME="C:\eventstore" `
 DOTNET_RUNNING_IN_CONTAINER=true
 
@@ -31,7 +31,7 @@ VOLUME C:\Logs
 RUN New-Item -Path Config -ItemType Directory | Out-Null
 
 WORKDIR $ES_HOME
-COPY --from=downloader C:\eventstore\EventStore-OSS-Windows-2019-v24.2.0 .
+COPY --from=downloader C:\eventstore\eventstoredb-24.10.1-ee-windows.x64 .
 COPY eventstore.conf .\Config\eventstore.conf
 
 
