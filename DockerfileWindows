@@ -31,10 +31,10 @@ VOLUME C:\Logs
 RUN New-Item -Path Config -ItemType Directory | Out-Null
 
 WORKDIR $ES_HOME
-COPY --from=downloader C:\eventstore\eventstoredb-24.10.1-ee-windows.x64 .
+COPY --from=downloader C:\eventstore\ .
 COPY eventstore.conf .\Config\eventstore.conf
 
 
 # Run Service
 SHELL ["cmd", "/S", "/C"]
-CMD "C:\eventstore\EventStore.ClusterNode.exe --db /Data --log /Logs --config=C:\eventstore\Config\eventstore.conf"
+CMD "c:\eventstore\EventStore.ClusterNode.exe --db c:\Data --log c:\Logs --config=C:\eventstore\Config\eventstore.conf"
