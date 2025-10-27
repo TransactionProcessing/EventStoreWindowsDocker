@@ -3,8 +3,8 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2022 AS downloader
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
-ENV ES_VERSION="24.10.1" `
-    ES_HOME="C:\eventstore"
+ENV ES_VERSION="25.1.0" `
+    ES_HOME="C:\kurrentdb"
 
 # ENV chocolateyUseWindowsCompression false
 
@@ -13,17 +13,17 @@ ENV ES_VERSION="24.10.1" `
 #         choco feature disable --name showDownloadProgress
 
 # RUN choco install eventstore-oss
-RUN Invoke-WebRequest "https://github.com/EventStore/EventStore/releases/download/v24.10.1/eventstoredb-24.10.1-ee-windows.x64.zip" -OutFile 'eventstore.zip' -UseBasicParsing; `
-Expand-Archive eventstore.zip -DestinationPath $env:ES_HOME ;
+RUN Invoke-WebRequest "https://github.com/kurrent-io/KurrentDB/releases/download/v25.1.0/kurrentdb-25.1.0-windows-x64.tar.gz" -OutFile 'kurrentdb.zip' -UseBasicParsing; `
+Expand-Archive kurrentdb.zip -DestinationPath $env:ES_HOME ;
 
 FROM mcr.microsoft.com/windows/servercore:ltsc2022
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
 
-ENV ES_VERSION="24.10.1" `
-ES_HOME="C:\eventstore" `
+ENV ES_VERSION="25.1.0" `
+ES_HOME="C:\kurrentdb" `
 DOTNET_RUNNING_IN_CONTAINER=true
 
-EXPOSE 1113 2113
+EXPOSE 2113
 
 VOLUME C:\Data
 VOLUME C:\Logs
@@ -31,8 +31,8 @@ VOLUME C:\Logs
 RUN New-Item -Path Config -ItemType Directory | Out-Null
 
 WORKDIR $ES_HOME
-COPY --from=downloader C:\eventstore\ .
-COPY eventstore.conf .\Config\eventstore.conf
+COPY --from=downloader C:\kurrentdb\ .
+COPY eventstore.conf .\Config\kurrentdb.yml
 
 
 # Run Service
