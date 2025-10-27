@@ -13,8 +13,8 @@ ENV ES_VERSION="25.1.0" `
 #         choco feature disable --name showDownloadProgress
 
 # RUN choco install eventstore-oss
-RUN Invoke-WebRequest "https://github.com/kurrent-io/KurrentDB/releases/download/v25.1.0/kurrentdb-25.1.0-windows-x64.tar.gz" -OutFile 'kurrentdb.zip' -UseBasicParsing; `
-Expand-Archive kurrentdb.zip -DestinationPath $env:ES_HOME ;
+#RUN Invoke-WebRequest "https://github.com/kurrent-io/KurrentDB/releases/download/v25.1.0/kurrentdb-25.1.0-windows-x64.tar.gz" -OutFile 'kurrentdb.zip' -UseBasicParsing; `
+tar -xzf kurrentdb.tar.gz -C $env:ES_HOME
 
 FROM mcr.microsoft.com/windows/servercore:ltsc2022
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
