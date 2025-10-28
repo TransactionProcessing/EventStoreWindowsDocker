@@ -3,8 +3,7 @@ RunProjections: All
 ClusterSize: 1
 SkipDbVerify: true
 StatsPeriodSec: -1
-OptimizeIndexMerge: true
 SkipIndexVerify: true
 EnableAtomPubOverHttp: true
 Insecure: true
-ExtIp: 0.0.0.0
+NodeIp: 0.0.0.0
