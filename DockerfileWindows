@@ -12,9 +12,9 @@ RUN Invoke-WebRequest "https://www.7-zip.org/a/7z2406-x64.msi" -OutFile "7z.msi"
     Remove-Item 7z.msi
 
 # Download and extract KurrentDB tar.gz
-RUN Invoke-WebRequest "https://github.com/kurrent-io/KurrentDB/releases/download/v25.1.0/kurrentdb-25.1.0-windows-x64.tar.gz" -OutFile "kurrentdb.tar.gz" -UseBasicParsing; `
+RUN Invoke-WebRequest "https://github.com/kurrent-io/KurrentDB/releases/download/v26.1.0/kurrentdb-26.1.0-windows-x64.tar.gz" -OutFile "kurrentdb.tar.gz" -UseBasicParsing; `
     & 'C:\Program Files\7-Zip\7z.exe' x kurrentdb.tar.gz -aoa -oC:\tmp; `
-    & 'C:\Program Files\7-Zip\7z.exe' x C:\tmp\kurrentdb-25.1.0-windows-x64.tar -aoa -oC:\kurrentdb; `
+    & 'C:\Program Files\7-Zip\7z.exe' x C:\tmp\kurrentdb-26.1.0-windows-x64.tar -aoa -oC:\kurrentdb; `
     Remove-Item -Recurse -Force C:\tmp, kurrentdb.tar.gz
 
 # ------------------------------------------------------------------------------
